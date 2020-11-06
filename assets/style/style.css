@@ -2,6 +2,38 @@ header {
     background-color: aquamarine;
     color: black;
     text-align: left;
-    height: 100px;
+    height: 75px;
     padding: 25px;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.container {
+    height: 100%;
+}
+
+#left {
+    float: left;
+    width: 30%;
+    min-height: 100%;
+    background-color: lightcyan;
+}
+
+#right {
+    float: right;
+    width: 70%;
+    min-height: 100%;
+    background-color: lightpink;
+}
+
+#left label {
+    display: block;
 }
