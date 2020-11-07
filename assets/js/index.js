@@ -2,6 +2,7 @@
 let $cityInput = $('#city-search-input');
 let $cityBtn = $('#city-search-btn');
 let $recentList = $('#recent-cities');
+let $weatherIconEl = $('#weather-icon');
 
 // DOM elements for main current weather display
 let $currentMain = $('#current-header');
@@ -33,6 +34,7 @@ $cityBtn.on('click', (e) => {
 // setting current weather
 // could seperate each one into a function and make them more detailed with what to show if have time
 function setCurrent(data) {
+    // add something for icon
     // setting date and location in DOM
     $currentMain.text(`${data.name} (${moment().format('MM[/]D[/]YYYY')})`);
 
@@ -85,9 +87,13 @@ function setWeeklyWeather(lat, lon) {
                 let dayTemp = res.daily[i].temp.day;
                 // current humidity
                 let dayHum = `${res.daily[i].humidity} %`;
+                // current days weather icon
+                let dayIconID = res.daily[i].weather[0].icon
+                let dayIconUrl = `http://openweathermap.org/img/w/${dayIconID}.png`
                 
                 // set html elements using str templates to corrospond with day were referencing from api response since the ids and elements have same num, kinda cool
                 $(`#day${i}-date`).text(dayDate);
+                $(`#day${i}-img`).attr('src', dayIconUrl);
                 $(`#day${i}-temp`).text(`Temp: ${dayTemp}`);
                 $(`#day${i}-hum`).text(`Humidity: ${dayHum}`);
             }
