@@ -41,3 +41,8 @@ body {
 #day1, #day2, #day3, #day4, #day5 {
     display: inline-block;
 }
+
+.dailyDiv {
+    padding: 5px;
+    margin: 5px;
+}
