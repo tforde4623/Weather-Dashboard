@@ -27,13 +27,14 @@
                     <i class="fas fa-search"></i>
                 </button>
             </form>
+            <!-- recent city's as an unordered list -->
             <ul id="recent-cities"></ul>
         </div>
 
         <!-- right column -->
         <div id="right">
             <div id="current-forcast">
-                <h2>Location / Date</h2>
+                <h2 id="current-header">Location / Date</h2>
                 <br>
                 <!-- take out placeholders and put Temp or whatever in js so Temp...: whatever degrees -->
                 <p id="current-temp">Temperature</p>
@@ -74,6 +75,8 @@
     
     <!-- linking jquery cdn -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- moment js cdn -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.25.1/moment.min.js"></script>
     <!-- linking MY external js -->
     <script src="assets/js/index.js"></script>
 </body>
