@@ -30,7 +30,7 @@ function callAPI(cityName) {
     $.ajax({
         type: 'GET',
         url: 'http://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&units=imperial&appid=36be3a17aed933ccf53d10149b72f6fb',
-        withCredentials: true
+        crossDomain: true
     })
     .fail(err => {
         // handle a bad request
@@ -154,3 +154,9 @@ function addSite(cityName) {
         localStorage.setItem("recentList", JSON.stringify(savedSites));
     }
 }
+
+// add a limit to amount of cities in the list (delete last one add new one)
+// do README.md page
+// style css BETTER
+// MAYBE make this an object oriented thing IDK yet
+// do some fail safes for searches and stuff
