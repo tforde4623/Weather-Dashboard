@@ -2,7 +2,6 @@
 let $cityInput = $('#city-search-input');
 let $cityBtn = $('#city-search-btn');
 let $recentList = $('#recent-cities');
-let $weatherIconEl = $('#weather-icon');
 
 // DOM elements for main current weather display
 let $currentMain = $('#current-header');
@@ -20,7 +19,8 @@ $cityBtn.on('click', (e) => {
     // ajax call for city
     $.ajax({
         type: 'GET',
-        url: 'http://api.openweathermap.org/data/2.5/weather?q='+ cityName +'&units=imperial&appid=36be3a17aed933ccf53d10149b72f6fb'
+        url: 'http://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&units=imperial&appid=36be3a17aed933ccf53d10149b72f6fb',
+        withCredentials: true
     })
         .fail(err => {
             // handle a bad request
@@ -34,9 +34,12 @@ $cityBtn.on('click', (e) => {
 // setting current weather
 // could seperate each one into a function and make them more detailed with what to show if have time
 function setCurrent(data) {
-    // add something for icon
+    console.log(data);
     // setting date and location in DOM
     $currentMain.text(`${data.name} (${moment().format('MM[/]D[/]YYYY')})`);
+
+    // api icon for current weather
+    $currentMain.append(`<img src="http://openweathermap.org/img/w/${data.weather[0].icon}.png" id="weather-icon" alt="weather-icon">`);
 
     // set temperature in DOM (had to use .html for easier use of UTF symbol)
     $currentTemp.html(`Temperature: ${data.main.temp} &#8457;`);
