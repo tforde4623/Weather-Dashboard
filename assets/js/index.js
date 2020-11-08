@@ -16,6 +16,40 @@ let cityNames;
 // on load display recent cities
 $(document).ready(() => { displayRecent() });
 
+// listener on city search button
+$cityBtn.on('click', (e) => {
+    e.preventDefault();
+    // get city name
+    let cityName = $cityInput.val();
+    callAPI(cityName);
+});
+
+// function to handle api call for whatever city    
+function callAPI(cityName) {
+    // ajax call for city
+    $.ajax({
+        type: 'GET',
+        url: 'http://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&units=imperial&appid=36be3a17aed933ccf53d10149b72f6fb',
+        withCredentials: true
+    })
+    .fail(err => {
+        // handle a bad request
+        console.log(err)
+    })
+    .done(res => {
+        setCurrent(res);
+        addSite(cityName);
+        // call display recent function so it'll update when new search (if new city)
+        displayRecent();
+    });
+};
+
+
+// function to handle btn clicks because listeners for dynamically created buttons was being ANNOYING asl
+function recentClick(name) {
+    callAPI(name);
+}
+
 // function to set recents in DOM
 function displayRecent() {
     // get city objects from storage
@@ -26,35 +60,11 @@ function displayRecent() {
 
     // display each city name calling value from object
     cityNames.forEach(name => {
-        // create a btn in an li for each recent city
-        let cityItem = $(`<li><button id="${name.cityName}">${name.cityName}</button></li>`);
+        // create a btn in an li for each recent city (put an onclick instead of a listener cause it was being ANNOYING for dynamically created buttons)
+        let cityItem = $(`<li><button onclick="recentClick('${name.cityName}')">${name.cityName}</button></li>`);
         $recentList.prepend(cityItem);
     });
 }
-
-// listener on city search button
-$cityBtn.on('click', (e) => {
-    e.preventDefault();
-    // get city name
-    let cityName = $cityInput.val();
-    
-    // ajax call for city
-    $.ajax({
-        type: 'GET',
-        url: 'http://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&units=imperial&appid=36be3a17aed933ccf53d10149b72f6fb',
-        withCredentials: true
-    })
-        .fail(err => {
-            // handle a bad request
-            console.log(err)
-        })
-        .done(res => {
-            setCurrent(res);
-            addSite(cityName);
-            // call display recent function so it'll update when new search (if new city)
-            displayRecent();
-        });
-});
 
 // setting current weather
 // could seperate each one into a function and make them more detailed with what to show if have time
@@ -144,5 +154,3 @@ function addSite(cityName) {
         localStorage.setItem("recentList", JSON.stringify(savedSites));
     }
 }
-
-// listener for recent city buttons
