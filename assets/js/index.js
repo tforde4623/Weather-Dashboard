@@ -10,6 +10,14 @@ let $currentHum = $('#current-hum');
 let $currentWindSpeed = $('#current-wind-speed');
 let $currentUvIndex = $('#current-UvI');
 
+// global list of city names so we can access outside function
+let cityNames;
+
+// on load display city names, get page ready
+$(document).ready(() => {
+    displaySaved();
+});
+
 // listener on city search button
 $cityBtn.on('click', (e) => {
     e.preventDefault();
@@ -35,7 +43,6 @@ $cityBtn.on('click', (e) => {
 // setting current weather
 // could seperate each one into a function and make them more detailed with what to show if have time
 function setCurrent(data) {
-    console.log(data);
     // setting date and location in DOM
     $currentMain.text(`${data.name} (${moment().format('MM[/]D[/]YYYY')})`);
 
@@ -106,7 +113,7 @@ function setWeeklyWeather(lat, lon) {
 
 function addSite(cityName) {
     // getting array from local storage, or setting empty array
-    let savedSites = JSON.parse(localStorage.getItem("siteList")) || [];
+    let savedSites = JSON.parse(localStorage.getItem("recentList")) || [];
     let cityList = [];
 
     // push each value (actual name of city) to city list
@@ -118,6 +125,18 @@ function addSite(cityName) {
     if (!cityList.includes(cityName)) {
         // if searched city is not in list
         savedSites.push({ cityName });
-        localStorage.setItem("siteList", JSON.stringify(savedSites));
+        localStorage.setItem("recentList", JSON.stringify(savedSites));
     }
+}
+
+function displaySaved() {
+    // get names from storage
+    let cityNames = JSON.parse(localStorage.getItem("recentList")) || [];
+
+    // display each city name
+    cityNames.forEach(name => {
+        let cityItem = $(`<li>${name.cityName}</li>`);
+        cityItem.attr('id', name.cityName);
+        $recentList.prepend(cityItem);
+    });
 }
