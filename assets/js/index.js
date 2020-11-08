@@ -28,6 +28,7 @@ $cityBtn.on('click', (e) => {
         })
         .done(res => {
             setCurrent(res);
+            addSite(cityName);
         });
 });
 
@@ -101,4 +102,22 @@ function setWeeklyWeather(lat, lon) {
                 $(`#day${i}-hum`).text(`Humidity: ${dayHum}`);
             }
         });
+}
+
+function addSite(cityName) {
+    // getting array from local storage, or setting empty array
+    let savedSites = JSON.parse(localStorage.getItem("siteList")) || [];
+    let cityList = [];
+
+    // push each value (actual name of city) to city list
+    savedSites.forEach(city => {
+        cityList.push(city.cityName);
+    });
+
+    // check if the searched city name is already in our cityList
+    if (!cityList.includes(cityName)) {
+        // if searched city is not in list
+        savedSites.push({ cityName });
+        localStorage.setItem("siteList", JSON.stringify(savedSites));
+    }
 }
