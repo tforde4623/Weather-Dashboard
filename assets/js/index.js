@@ -14,17 +14,23 @@ let $currentUvIndex = $('#current-UvI');
 let cityNames;
 
 // on load display recent cities
-$(document).ready(() => {
-     // get city objects from storage
-     let cityNames = JSON.parse(localStorage.getItem("recentList")) || [];
+$(document).ready(() => { displayRecent() });
 
-     // display each city name calling value from object
-     cityNames.forEach(name => {
-         // create a btn in an li for each recent city
-         let cityItem = $(`<li><button id="${name.cityName}">${name.cityName}</button></li>`);
-         $recentList.prepend(cityItem);
-     });
-});
+// function to set recents in DOM
+function displayRecent() {
+    // get city objects from storage
+    let cityNames = JSON.parse(localStorage.getItem("recentList")) || [];
+
+    // clear list in DOM so we don't get duplicates
+    $recentList.empty();
+
+    // display each city name calling value from object
+    cityNames.forEach(name => {
+        // create a btn in an li for each recent city
+        let cityItem = $(`<li><button id="${name.cityName}">${name.cityName}</button></li>`);
+        $recentList.prepend(cityItem);
+    });
+}
 
 // listener on city search button
 $cityBtn.on('click', (e) => {
@@ -45,6 +51,8 @@ $cityBtn.on('click', (e) => {
         .done(res => {
             setCurrent(res);
             addSite(cityName);
+            // call display recent function so it'll update when new search (if new city)
+            displayRecent();
         });
 });
 
