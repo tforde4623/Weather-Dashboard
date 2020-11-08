@@ -13,9 +13,17 @@ let $currentUvIndex = $('#current-UvI');
 // global list of city names so we can access outside function
 let cityNames;
 
-// on load display city names, get page ready
+// on load display recent cities
 $(document).ready(() => {
-    displaySaved();
+     // get city objects from storage
+     let cityNames = JSON.parse(localStorage.getItem("recentList")) || [];
+
+     // display each city name calling value from object
+     cityNames.forEach(name => {
+         // create a btn in an li for each recent city
+         let cityItem = $(`<li><button id="${name.cityName}">${name.cityName}</button></li>`);
+         $recentList.prepend(cityItem);
+     });
 });
 
 // listener on city search button
@@ -129,14 +137,4 @@ function addSite(cityName) {
     }
 }
 
-function displaySaved() {
-    // get names from storage
-    let cityNames = JSON.parse(localStorage.getItem("recentList")) || [];
-
-    // display each city name
-    cityNames.forEach(name => {
-        let cityItem = $(`<li>${name.cityName}</li>`);
-        cityItem.attr('id', name.cityName);
-        $recentList.prepend(cityItem);
-    });
-}
+// listener for recent city buttons
