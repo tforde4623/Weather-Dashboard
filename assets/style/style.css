@@ -68,6 +68,11 @@ body {
     background-color: #3a65ff;
 }
 
+#city-search-input {
+    width: 70%;
+    height: 28px;
+}
+
 #city-search-btn:hover {
     border: #65b5ff 3px solid;
 }
@@ -94,7 +99,8 @@ body {
 
 @media (max-width: 400px) {
     header {
-        padding: 30px 10px 30px 10px;
+        padding: 20px 10px 40px 10px;
+        margin-bottom: 10px;
     }
     #left, #right {
         float: none;
@@ -104,7 +110,7 @@ body {
 
     .search-field {
         font-size: 18px;
-        margin-left: 0px;
+        margin-left: 10px;
     }
 
     .dailyDiv {
