@@ -20,7 +20,9 @@ $(document).ready(() => { displayRecent() });
 $cityBtn.on('click', (e) => {
     e.preventDefault();
     // get city name
-    let cityName = $cityInput.val();
+    let cityNameInp = $cityInput.val();
+    // make sure the first letter of city is capitalized
+    let cityName = cityNameInp.charAt(0).toUpperCase() + cityNameInp.slice(1);
     callAPI(cityName);
 });
 
@@ -160,7 +162,6 @@ function addSite(cityName) {
     }
 }
 
-// add a limit to amount of cities in the list (delete last one add new one)
 // do README.md page
 // make state titles upper case
 // MAYBE make this an object oriented thing IDK yet
