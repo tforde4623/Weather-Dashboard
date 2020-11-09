@@ -19,20 +19,20 @@
     <!-- main body grid layout-->
     <main class="container">
         <!-- left column -->
-        <div id="left">
+        <div class="left-side clearfix" id="left">
             <form>
-                <label for="city-search">Search for a city:</label>
-                <input type="text" id="city-search-input" name="city-search">
-                <button id="city-search-btn">
+                <label class="search-field" for="city-search">Search for a city:</label>
+                <input class="search-field" type="text" id="city-search-input" name="city-search">
+                <button class="search-field" id="city-search-btn">
                     <i class="fas fa-search"></i>
                 </button>
             </form>
             <!-- recent city's as an unordered list -->
-            <ul id="recent-cities"></ul>
+            <ul class="left-side" id="recent-cities"></ul>
         </div>
 
         <!-- right column -->
-        <div id="right">
+        <div class="clearfix" id="right">
             <div id="current-forcast">
                 <!-- add something for icon -->
                 <h2 id="current-header">

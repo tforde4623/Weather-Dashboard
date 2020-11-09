@@ -1,9 +1,10 @@
 header {
-    background-color: aquamarine;
-    color: black;
+    background-color: #404040;
+    color: #fefefe;
+    font-family: Arial, Helvetica, sans-serif;
     text-align: left;
     height: 75px;
-    padding: 25px;
+    padding: 15px 0 15px 45px;
 }
 
 html {
@@ -22,27 +23,96 @@ body {
 
 #left {
     float: left;
-    width: 30%;
+    width: 27.5%;
     min-height: 100%;
-    background-color: lightcyan;
+    background-color: #f8f8f8;
 }
 
 #right {
     float: right;
     width: 70%;
     min-height: 100%;
-    background-color: lightpink;
+    background-color: #fefefe;
 }
 
 #left label {
     display: block;
+    padding: 5px;
 }
 
-#day1, #day2, #day3, #day4, #day5 {
-    display: inline-block;
+#current-forcast {
+    margin: 15px 0 30px 0;
+    padding: 20px;
+    border: lightgrey 1px solid;
+    border-radius: 15px;
 }
 
 .dailyDiv {
-    padding: 5px;
-    margin: 5px;
+    padding: 10px;
+    margin: 10px;
+    margin-right: 2.5%;
+    display: inline-block;
+    background-color: #3a65ff;
+    color: #fefefe;
+    border-radius: 10px;
+}
+
+.search-field {
+    font-size: 22px;
+    margin-left: 10px;
+}
+
+#city-search-btn {
+    margin-left: 0px;
+    padding: 6px 7px 4px 7px;
+    border-radius: 5px;
+    color: #fefefe;
+    font-size: 18px;
+    background-color: #3a65ff;
+}
+
+#city-search-btn:hover {
+    border: #65b5ff 3px solid;
+}
+
+#recent-cities {
+    list-style: none;
+    padding: 0px;
+    margin-top: 30px;
+    margin-left: 10px;
+}
+
+#recent-cities li button {
+    padding: 15px;
+    font-size: 18px;
+    color: #505050;
+    background-color: #fefefe;
+    width: 95%;
+    border: lightgrey 0.5px solid;
+}
+
+.clearfix {
+    overflow: auto;
+}
+
+@media (max-width: 400px) {
+    header {
+        padding: 30px 10px 30px 10px;
+    }
+    #left, #right {
+        float: none;
+        width: 100%;
+    }
+
+    .search-field {
+        font-size: 18px;
+        margin-left: 0px;
+    }
+
+    .dailyDiv {
+        margin: 0;
+        margin-bottom: 10px;
+        width: 95%;
+        border-radius: 0px;
+    }
 }

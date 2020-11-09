@@ -157,6 +157,8 @@ function addSite(cityName) {
 
 // add a limit to amount of cities in the list (delete last one add new one)
 // do README.md page
+// make state titles upper case
 // style css BETTER
 // MAYBE make this an object oriented thing IDK yet
 // do some fail safes for searches and stuff
+// maybe add uvi color
