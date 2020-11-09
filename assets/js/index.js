@@ -147,6 +147,11 @@ function addSite(cityName) {
         cityList.push(city.cityName);
     });
 
+    // if there is 10 elements being displayed already, get rid of last before adding new
+    if (cityList.length >= 10) {
+        savedSites.shift();
+    }
+
     // check if the searched city name is already in our cityList
     if (!cityList.includes(cityName)) {
         // if searched city is not in list
@@ -158,7 +163,6 @@ function addSite(cityName) {
 // add a limit to amount of cities in the list (delete last one add new one)
 // do README.md page
 // make state titles upper case
-// style css BETTER
 // MAYBE make this an object oriented thing IDK yet
 // do some fail safes for searches and stuff
 // maybe add uvi color
