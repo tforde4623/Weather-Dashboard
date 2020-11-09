@@ -21,7 +21,7 @@ $cityBtn.on('click', (e) => {
     e.preventDefault();
     // get city name
     let cityNameInp = $cityInput.val();
-    // make sure the first letter of city is capitalized
+    // make sure the first letter of city is upper case
     let cityName = cityNameInp.charAt(0).toUpperCase() + cityNameInp.slice(1);
     callAPI(cityName);
 });
@@ -35,8 +35,16 @@ function callAPI(cityName) {
         crossDomain: true
     })
     .fail(err => {
-        // handle a bad request
-        console.log(err)
+        // check if a bad request (95% of the time in this case it's cause the city is wrong)
+        if (JSON.stringify(err).includes(404)) {
+            alert("Oops! We couldn't seem to locate that city. Please check your spelling or location and try again.");
+        } else if (JSON.stringify(err).includes(429)) {
+            // to many requests
+            alert('Oops! It seems too many data requests are coming from this application. Please wait a little while and try again.');
+        } else {
+            // other errors
+            alert('Oops! It seems this application is experiencing an error.');
+        }
     })
     .done(res => {
         setCurrent(res);
@@ -47,7 +55,7 @@ function callAPI(cityName) {
 };
 
 
-// function to handle btn clicks because listeners for dynamically created buttons was being ANNOYING asl
+// function to handle btn clicks
 function recentClick(name) {
     callAPI(name);
 }
@@ -62,14 +70,13 @@ function displayRecent() {
 
     // display each city name calling value from object
     cityNames.forEach(name => {
-        // create a btn in an li for each recent city (put an onclick instead of a listener cause it was being ANNOYING for dynamically created buttons)
+        // create a btn in an li for each recent city with an onclick
         let cityItem = $(`<li><button onclick="recentClick('${name.cityName}')">${name.cityName}</button></li>`);
         $recentList.prepend(cityItem);
     });
 }
 
 // setting current weather
-// could seperate each one into a function and make them more detailed with what to show if have time
 function setCurrent(data) {
     // setting date and location in DOM
     $currentMain.text(`${data.name} (${moment().format('MM[/]D[/]YYYY')})`);
@@ -103,7 +110,6 @@ function setUvIndex(lat, lon) {
         .fail(err => console.log(err))
         .done(res => {
             // set DOM to uv index value from response when done
-            // maybe change to html and do stuff depending on color
             $currentUvIndex.text(`UV Index: ${res.value}`);
         });
 }
@@ -161,9 +167,3 @@ function addSite(cityName) {
         localStorage.setItem("recentList", JSON.stringify(savedSites));
     }
 }
-
-// do README.md page
-// make state titles upper case
-// MAYBE make this an object oriented thing IDK yet
-// do some fail safes for searches and stuff
-// maybe add uvi color
