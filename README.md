@@ -5,4 +5,16 @@ This app is made using HTML, CSS, and JavaScript, as well as some libraries like
 
 Live app: https://tforde4623.github.io/Weather-Dashboard/
 
+![screen shot of weather app](./assets/screenShots/weatherDash.png)
+
+
 ![screen shot of weather app](./assets/screenShots/weather-app-ss.png)
+
+Technologies used:
+* [Font Awesome](https://fontawesome.com/)
+* [Moment.js](https://momentjs.com/)
+* [jQuery](https://jquery.com/)
+* [AJAX](https://api.jquery.com/jquery.ajax/)
+* [GitHub](https://github.com/)
+* [Open Weather Map API](https://openweathermap.org/api)
+
